@@ -7,13 +7,14 @@ namespace Overwatch.Hangfire.Client
 {
     public class Program
     {
+        private const string projects = @"C:\Overwatch\Projects";
         static List<TestProject> overwatchprojects = new List<TestProject>();
         static void Main(string[] args)
         {
             GlobalConfiguration.Configuration.UseSqlServerStorage("Server=UKCAML11345\\MSSQLSERVER01;Database=HangfireDb;Trusted_Connection=True;TrustServerCertificate=True;");
 
             // Using Spectre Console to list and select tests
-            string projects = @"C:\Overwatch\Projects";
+            string projects = Program.projects;
 
             overwatchprojects = GetOverwatchProjectsFromDisk(projects);
 
@@ -82,15 +83,17 @@ namespace Overwatch.Hangfire.Client
             var watcher = new FileSystemWatcher(directory)
             {
                 NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName,
-                Filter = "project.json"  // Watch for project.json files
+                Filter = "project.json",  // Watch for project.json files
+                IncludeSubdirectories = true
             };
+
 
             watcher.Created += (sender, e) =>
             {
                 // Re-load the test projects list when a new project file is created
                 Console.WriteLine("New test project detected, refreshing the list...");
 
-                overwatchprojects = GetOverwatchProjectsFromDisk("C:\\Tests");
+                overwatchprojects = GetOverwatchProjectsFromDisk(projects);
             };
 
             watcher.EnableRaisingEvents = true;
