@@ -11,6 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenAIDotNetStandard", "Ope
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overwatch.Docker", "Overwatch.Docker\Overwatch.Docker.csproj", "{43DC320F-8EF4-4B01-B6EE-0633F879AD8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NModel", "NModel\NModel.csproj", "{9E9EA768-11CF-49DA-919F-3BD3C3EA942B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overwatch.Parallel.Testing", "Overwatch.Parallel.Testing\Overwatch.Parallel.Testing.csproj", "{CC56D275-1AA4-4805-91FA-6A62D8C806C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CT", "CT\CT.csproj", "{EF901B70-C9C4-4647-B48C-B20BE8D60E6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overwatch.Hangfire.Client", "Overwatch.Hangfire.Client\Overwatch.Hangfire.Client.csproj", "{75C513E6-7058-4A72-AB90-66EA95F60C48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overwatch.Hangfire.Server", "Overwatch.Hangfire.Server\Overwatch.Hangfire.Server.csproj", "{508B5329-3BDB-4B74-A86C-8DE47C1C987D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +43,26 @@ Global
 		{43DC320F-8EF4-4B01-B6EE-0633F879AD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43DC320F-8EF4-4B01-B6EE-0633F879AD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43DC320F-8EF4-4B01-B6EE-0633F879AD8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E9EA768-11CF-49DA-919F-3BD3C3EA942B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9EA768-11CF-49DA-919F-3BD3C3EA942B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9EA768-11CF-49DA-919F-3BD3C3EA942B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9EA768-11CF-49DA-919F-3BD3C3EA942B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC56D275-1AA4-4805-91FA-6A62D8C806C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC56D275-1AA4-4805-91FA-6A62D8C806C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC56D275-1AA4-4805-91FA-6A62D8C806C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC56D275-1AA4-4805-91FA-6A62D8C806C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF901B70-C9C4-4647-B48C-B20BE8D60E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF901B70-C9C4-4647-B48C-B20BE8D60E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF901B70-C9C4-4647-B48C-B20BE8D60E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF901B70-C9C4-4647-B48C-B20BE8D60E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75C513E6-7058-4A72-AB90-66EA95F60C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C513E6-7058-4A72-AB90-66EA95F60C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C513E6-7058-4A72-AB90-66EA95F60C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C513E6-7058-4A72-AB90-66EA95F60C48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
