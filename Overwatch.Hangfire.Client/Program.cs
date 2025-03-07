@@ -7,23 +7,39 @@ namespace Overwatch.Hangfire.Client
 {
     public class Program
     {
+        static List<TestProject> overwatchprojects = new List<TestProject>();
         static void Main(string[] args)
         {
             GlobalConfiguration.Configuration.UseSqlServerStorage("Server=UKCAML11345\\MSSQLSERVER01;Database=HangfireDb;Trusted_Connection=True;TrustServerCertificate=True;");
 
             // Using Spectre Console to list and select tests
-            //var tests = GetOverwatchProjectTests();
+            string projects = @"C:\Overwatch\Projects";
 
-            var overwatchprojects = GetOverwatchProjectsFromDisk(@"C:\Overwatch\Projects");
+            overwatchprojects = GetOverwatchProjectsFromDisk(projects);
 
-            // Display Spectre Console UI for test selection
-            var selectedTests = PromptTestSelection(overwatchprojects);
+            var cts = new CancellationTokenSource();
+            var watchTask = Task.Run(() => WatchForNewTestProjects(projects, cts.Token));
 
-            // Execute selected tests using Hangfire
-            TestRunner.ExecuteTestsAsync(selectedTests).Wait();
+            while (true)
+            {
+                // Display Spectre Console UI for test selection
+                var selectedTests = PromptTestSelection(overwatchprojects);
 
-            Console.WriteLine("Press Enter to exit.");
-            Console.ReadLine();
+                // Execute selected tests using Hangfire
+                TestRunner.ExecuteTestsAsync(selectedTests).Wait();
+
+                var continueRunning = AnsiConsole.Prompt(new TextPrompt<string>("Do you want to select more tests? (y/n)").PromptStyle("green"));
+
+                if (continueRunning.ToLower() != "y")
+                {
+                    break;
+                }
+
+                overwatchprojects = GetOverwatchProjectsFromDisk(@"C:\Overwatch\Projects");
+
+            }
+
+            Console.WriteLine("Exiting application.");
 
         }
 
@@ -42,20 +58,6 @@ namespace Overwatch.Hangfire.Client
             return availableProjects.Where(p => selectedProjects.Contains(p.Name)).ToList();
         }
 
-        //private static List<string> GetOverwatchProjectTests(string directory)
-        //{
-        //    List<string> testProjects = new List<string>();
-
-        //    // Assuming test projects are directories or files in the given directory
-        //    foreach (var dir in Directory.GetDirectories(directory))
-        //    {
-        //        // Add the directory name or file to the list of test projects
-        //        testProjects.Add(Path.GetFileName(dir));
-        //    }
-
-        //    return testProjects;
-        //}
-
         private static List<TestProject> GetOverwatchProjectsFromDisk(string directory)
         {
             List<TestProject> testProjects = new List<TestProject>();
@@ -73,6 +75,33 @@ namespace Overwatch.Hangfire.Client
             }
 
             return testProjects;
+        }
+
+        private static void WatchForNewTestProjects(string directory, CancellationToken cancellationToken)
+        {
+            var watcher = new FileSystemWatcher(directory)
+            {
+                NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName,
+                Filter = "project.json"  // Watch for project.json files
+            };
+
+            watcher.Created += (sender, e) =>
+            {
+                // Re-load the test projects list when a new project file is created
+                Console.WriteLine("New test project detected, refreshing the list...");
+
+                overwatchprojects = GetOverwatchProjectsFromDisk("C:\\Tests");
+            };
+
+            watcher.EnableRaisingEvents = true;
+
+            // Wait for cancellation signal
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                Thread.Sleep(1000); // Keep the watcher alive
+            }
+
+            watcher.Dispose();
         }
 
 
