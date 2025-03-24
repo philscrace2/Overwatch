@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overwatch.Hangfire.Client",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overwatch.Hangfire.Server", "Overwatch.Hangfire.Server\Overwatch.Hangfire.Server.csproj", "{508B5329-3BDB-4B74-A86C-8DE47C1C987D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NModel.Visualization", "NModel.Visualization\NModel.Visualization.csproj", "{18CDB2C5-7380-47A5-96DE-0E51D77AF0C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{508B5329-3BDB-4B74-A86C-8DE47C1C987D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18CDB2C5-7380-47A5-96DE-0E51D77AF0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18CDB2C5-7380-47A5-96DE-0E51D77AF0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18CDB2C5-7380-47A5-96DE-0E51D77AF0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18CDB2C5-7380-47A5-96DE-0E51D77AF0C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
