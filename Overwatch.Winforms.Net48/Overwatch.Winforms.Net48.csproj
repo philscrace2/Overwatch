@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{29114F16-868E-466F-8BBD-D291A6C5CFC7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Overwatch.Winforms.Net48</RootNamespace>
+    <AssemblyName>Overwatch.Winforms.Net48</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.Desktop.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v23.2.Core, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Canvas.cs" />
+    <Compile Include="DocumentManager.cs" />
+    <Compile Include="IModifiable.cs" />
+    <Compile Include="IProjectItem.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs" />
+    <Compile Include="ModelExplorer\DiagramNode.cs" />
+    <Compile Include="ModelExplorer\DocumentEventHandler.cs" />
+    <Compile Include="ModelExplorer\EmptyProjectNode.cs" />
+    <Compile Include="ModelExplorer\IDiagram.cs" />
+    <Compile Include="ModelExplorer\ModelNode.cs" />
+    <Compile Include="ModelExplorer\ModelView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ModelExplorer\ModelView.Designer.cs">
+      <DependentUpon>ModelView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelExplorer\ProjectItemNode.cs" />
+    <Compile Include="ModelExplorer\ProjectNode.cs" />
+    <Compile Include="ModificationEventArgs.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="ProjectEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabBar.Designer.cs">
+      <DependentUpon>TabBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabbedWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabbedWindow.Designer.cs">
+      <DependentUpon>TabbedWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workspace.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelExplorer\ModelView.resx">
+      <DependentUpon>ModelView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NModel.Visualization\NModel.Visualization.csproj">
+      <Project>{18cdb2c5-7380-47a5-96de-0e51d77af0c4}</Project>
+      <Name>NModel.Visualization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NModel\NModel.csproj">
+      <Project>{9e9ea768-11cf-49da-919f-3bd3c3ea942b}</Project>
+      <Name>NModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TranslationsNET48\TranslationsNET48.csproj">
+      <Project>{2432f6f5-bf85-42c2-b304-15c6d41841a8}</Project>
+      <Name>TranslationsNET48</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\actual_size.png" />
+    <Content Include="Resources\save.png" />
+    <Content Include="Resources\web.png" />
+    <Content Include="Resources\actor.png" />
+    <Content Include="Resources\aggregation.png" />
+    <Content Include="Resources\align_bottom.png" />
+    <Content Include="Resources\align_horizontal.png" />
+    <Content Include="Resources\align_left.png" />
+    <Content Include="Resources\align_right.png" />
+    <Content Include="Resources\align_top.png" />
+    <Content Include="Resources\align_vertical.png" />
+    <Content Include="Resources\association.png" />
+    <Content Include="Resources\auto_layout.png" />
+    <Content Include="Resources\auto_zoom.png" />
+    <Content Include="Resources\bidirectional.png" />
+    <Content Include="Resources\boundary.bmp" />
+    <Content Include="Resources\class.png" />
+    <Content Include="Resources\code_generator.png" />
+    <Content Include="Resources\collapse.png" />
+    <Content Include="Resources\collapse_all.png" />
+    <Content Include="Resources\comment.png" />
+    <Content Include="Resources\composition.png" />
+    <Content Include="Resources\constructor.png" />
+    <Content Include="Resources\copy.png" />
+    <Content Include="Resources\copy_as_image.png" />
+    <Content Include="Resources\csharp.bmp" />
+    <Content Include="Resources\cut.png" />
+    <Content Include="Resources\default_class.png" />
+    <Content Include="Resources\default_const.png" />
+    <Content Include="Resources\default_constructor.png" />
+    <Content Include="Resources\default_delegate.png" />
+    <Content Include="Resources\default_destructor.png" />
+    <Content Include="Resources\default_enum.png" />
+    <Content Include="Resources\default_event.png" />
+    <Content Include="Resources\default_field.png" />
+    <Content Include="Resources\default_interface.png" />
+    <Content Include="Resources\default_method.png" />
+    <Content Include="Resources\default_operator.png" />
+    <Content Include="Resources\default_property.png" />
+    <Content Include="Resources\default_readonly.png" />
+    <Content Include="Resources\default_structure.png" />
+    <Content Include="Resources\default_writeonly.png" />
+    <Content Include="Resources\delegate.png" />
+    <Content Include="Resources\delete.png" />
+    <Content Include="Resources\dependency.png" />
+    <Content Include="Resources\destructor.png" />
+    <Content Include="Resources\edit_comment.png" />
+    <Content Include="Resources\edit_members.png" />
+    <Content Include="Resources\enum.png" />
+    <Content Include="Resources\enum_item.png" />
+    <Content Include="Resources\event.png" />
+    <Content Include="Resources\expand.png" />
+    <Content Include="Resources\expand_all.png" />
+    <Content Include="Resources\extends.png" />
+    <Content Include="Resources\field.png" />
+    <Content Include="Resources\format.png" />
+    <Content Include="Resources\generalization.png" />
+    <Content Include="Resources\image.png" />
+    <Content Include="Resources\implements.png" />
+    <Content Include="Resources\includes.png" />
+    <Content Include="Resources\interface_24bits.png" />
+    <Content Include="Resources\interface_32bits.png" />
+    <Content Include="Resources\internal_class.png" />
+    <Content Include="Resources\internal_const.png" />
+    <Content Include="Resources\internal_constructor.png" />
+    <Content Include="Resources\internal_delegate.png" />
+    <Content Include="Resources\internal_enum.png" />
+    <Content Include="Resources\internal_event.png" />
+    <Content Include="Resources\internal_field.png" />
+    <Content Include="Resources\internal_interface.png" />
+    <Content Include="Resources\internal_method.png" />
+    <Content Include="Resources\internal_operator.png" />
+    <Content Include="Resources\internal_property.png" />
+    <Content Include="Resources\internal_readonly.png" />
+    <Content Include="Resources\internal_structure.png" />
+    <Content Include="Resources\internal_writeonly.png" />
+    <Content Include="Resources\java.bmp" />
+    <Content Include="Resources\method.png" />
+    <Content Include="Resources\move_down.png" />
+    <Content Include="Resources\move_up.png" />
+    <Content Include="Resources\nesting.png" />
+    <Content Include="Resources\new_constructor.png" />
+    <Content Include="Resources\new_destructor.png" />
+    <Content Include="Resources\new_entity.png" />
+    <Content Include="Resources\new_enum_item.png" />
+    <Content Include="Resources\new_event.png" />
+    <Content Include="Resources\new_field.png" />
+    <Content Include="Resources\new_method.png" />
+    <Content Include="Resources\new_modifier.png" />
+    <Content Include="Resources\new_parameter.png" />
+    <Content Include="Resources\new_property.png" />
+    <Content Include="Resources\note.png" />
+    <Content Include="Resources\overrides.png" />
+    <Content Include="Resources\Package.png" />
+    <Content Include="Resources\parameter.png" />
+    <Content Include="Resources\paste.png" />
+    <Content Include="Resources\private_class.png" />
+    <Content Include="Resources\private_const.png" />
+    <Content Include="Resources\private_constructor.png" />
+    <Content Include="Resources\private_delegate.png" />
+    <Content Include="Resources\private_destructor.png" />
+    <Content Include="Resources\private_enum.png" />
+    <Content Include="Resources\private_event.png" />
+    <Content Include="Resources\private_field.png" />
+    <Content Include="Resources\private_interface.png" />
+    <Content Include="Resources\private_method.png" />
+    <Content Include="Resources\private_operator.png" />
+    <Content Include="Resources\private_property.png" />
+    <Content Include="Resources\private_readonly.png" />
+    <Content Include="Resources\private_structure.png" />
+    <Content Include="Resources\private_writeonly.png" />
+    <Content Include="Resources\property.png" />
+    <Content Include="Resources\protected_class.png" />
+    <Content Include="Resources\protected_const.png" />
+    <Content Include="Resources\protected_constructor.png" />
+    <Content Include="Resources\protected_delegate.png" />
+    <Content Include="Resources\protected_enum.png" />
+    <Content Include="Resources\protected_event.png" />
+    <Content Include="Resources\protected_field.png" />
+    <Content Include="Resources\protected_interface.png" />
+    <Content Include="Resources\protected_method.png" />
+    <Content Include="Resources\protected_operator.png" />
+    <Content Include="Resources\protected_property.png" />
+    <Content Include="Resources\protected_readonly.png" />
+    <Content Include="Resources\protected_structure.png" />
+    <Content Include="Resources\protected_writeonly.png" />
+    <Content Include="Resources\protint_class.png" />
+    <Content Include="Resources\protint_const.png" />
+    <Content Include="Resources\protint_constructor.png" />
+    <Content Include="Resources\protint_delegate.png" />
+    <Content Include="Resources\protint_enum.png" />
+    <Content Include="Resources\protint_event.png" />
+    <Content Include="Resources\protint_field.png" />
+    <Content Include="Resources\protint_interface.png" />
+    <Content Include="Resources\protint_method.png" />
+    <Content Include="Resources\protint_operator.png" />
+    <Content Include="Resources\protint_property.png" />
+    <Content Include="Resources\protint_readonly.png" />
+    <Content Include="Resources\protint_structure.png" />
+    <Content Include="Resources\protint_writeonly.png" />
+    <Content Include="Resources\public_class.png" />
+    <Content Include="Resources\public_const.png" />
+    <Content Include="Resources\public_constructor.png" />
+    <Content Include="Resources\public_delegate.png" />
+    <Content Include="Resources\public_enum.png" />
+    <Content Include="Resources\public_event.png" />
+    <Content Include="Resources\public_field.png" />
+    <Content Include="Resources\public_interface.png" />
+    <Content Include="Resources\public_method.png" />
+    <Content Include="Resources\public_operator.png" />
+    <Content Include="Resources\public_property.png" />
+    <Content Include="Resources\public_readonly.png" />
+    <Content Include="Resources\public_structure.png" />
+    <Content Include="Resources\public_writeonly.png" />
+    <Content Include="Resources\realization.png" />
+    <Content Include="Resources\redo.png" />
+    <Content Include="Resources\sort_by_access.png" />
+    <Content Include="Resources\sort_by_kind.png" />
+    <Content Include="Resources\sort_by_name.png" />
+    <Content Include="Resources\static.png" />
+    <Content Include="Resources\struct.png" />
+    <Content Include="Resources\undo.png" />
+    <Content Include="Resources\unidirectional.png" />
+    <Content Include="Resources\usecase.png" />
+    <Content Include="Resources\usecase_diagram.bmp" />
+    <Content Include="Resources\zoom.png" />
+    <Content Include="Resources\zoom_in.png" />
+    <Content Include="Resources\zoom_out.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
