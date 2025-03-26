@@ -1,7 +1,7 @@
 ﻿// NClass - Free class diagram editor
 // Copyright (C) 2006-2009 Balazs Tihanyi
 // Copyright (C) 2020 Georgi Baychev
-//
+
 // This program is free software; you can redistribute it and/or modify it under
 // the terms of the GNU General Public License as published by the Free Software
 // Foundation; either version 3 of the License, or (at your option) any later version.
@@ -14,10 +14,24 @@
 // this program; if not, write to the Free Software Foundation, Inc.,
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+using System;
+
 namespace Overwatch.Winforms.Net48
 {
-    public interface IDiagram : IDocument
+    public delegate void ProjectItemEventHandler(object sender, ProjectItemEventArgs e);
+
+    public class ProjectItemEventArgs
     {
-        string Name { get; set; }
+        IProjectItem projectItem;
+
+        public ProjectItemEventArgs(IProjectItem projectItem)
+        {
+            this.projectItem = projectItem;
+        }
+
+        public IProjectItem ProjectItem
+        {
+            get { return projectItem; }
+        }
     }
 }

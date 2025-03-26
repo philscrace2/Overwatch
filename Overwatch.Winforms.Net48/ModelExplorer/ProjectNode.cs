@@ -17,8 +17,9 @@
 using System;
 using System.Windows.Forms;
 using TranslationsNET48;
+using Overwatch.Winforms.Net48.Properties;
 
-namespace Overwatch.Winforms.Net48
+namespace Overwatch.Winforms.Net48.ModelExplorer
 {
     public sealed class ProjectNode : ModelNode
     {
@@ -152,12 +153,12 @@ namespace Overwatch.Winforms.Net48
             Text = project.Name;
         }
 
-        private void project_ItemAdded(object sender, ProjectEventArgs e)
+        private void project_ItemAdded(object sender, ProjectItemEventArgs e)
         {
             AddProjectItemNode(e.ProjectItem);
         }
 
-        private void project_ItemRemoved(object sender, ProjectEventArgs e)
+        private void project_ItemRemoved(object sender, ProjectItemEventArgs e)
         {
             RemoveProjectItemNode(e.ProjectItem);
             if (project.IsEmpty)

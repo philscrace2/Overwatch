@@ -18,18 +18,18 @@ using System;
 
 namespace Overwatch.Winforms.Net48
 {
-    public delegate void ProjectItemEventHandler(object sender, ProjectEventArgs e);
+    public delegate void ProjectEventHandler(object sender, ProjectEventArgs e);
 
     public class ProjectEventArgs
     {
-        IProjectItem projectItem;
+        Project projectItem;
 
-        public ProjectEventArgs(IProjectItem projectItem)
+        public ProjectEventArgs(Project projectItem)
         {
             this.projectItem = projectItem;
         }
 
-        public IProjectItem ProjectItem
+        public Project Project
         {
             get { return projectItem; }
         }

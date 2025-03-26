@@ -19,7 +19,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using TranslationsNET48;
 
-namespace Overwatch.Winforms.Net48
+namespace Overwatch.Winforms.Net48.ModelExplorer
 {
     public sealed class EmptyProjectNode : ModelNode
     {
@@ -47,7 +47,7 @@ namespace Overwatch.Winforms.Net48
             NodeFont = new Font(TreeView.Font, FontStyle.Italic);
         }
 
-        private void project_ItemAdded(object sender, ProjectEventArgs e)
+        private void project_ItemAdded(object sender, ProjectItemEventArgs e)
         {
             this.Delete();
         }

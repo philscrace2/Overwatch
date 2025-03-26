@@ -19,8 +19,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Xml;
 using System.IO;
-using NClass.Core.UndoRedo;
-using NClass.Translations;
+using TranslationsNET48;
 
 namespace Overwatch.Winforms.Net48
 {
@@ -200,7 +199,7 @@ namespace Overwatch.Winforms.Net48
             item.Modified += item_Modified;
             items.Add(item);
 
-            OnItemAdded(new ProjectEventArgs(item));
+            OnItemAdded(new ProjectItemEventArgs(item));
             OnModified(ModificationEventArgs.Empty);
         }
 
@@ -210,7 +209,7 @@ namespace Overwatch.Winforms.Net48
             {
                 item.Close();
                 item.Modified -= item_Modified;
-                OnItemRemoved(new ProjectEventArgs(item));
+                OnItemRemoved(new ProjectItemEventArgs(item));
                 OnModified(ModificationEventArgs.Empty);
             }
         }
@@ -455,12 +454,12 @@ namespace Overwatch.Winforms.Net48
             Renamed?.Invoke(this, e);
         }
 
-        private void OnItemAdded(ProjectEventArgs e)
+        private void OnItemAdded(ProjectItemEventArgs e)
         {
             ItemAdded?.Invoke(this, e);
         }
 
-        private void OnItemRemoved(ProjectEventArgs e)
+        private void OnItemRemoved(ProjectItemEventArgs e)
         {
             ItemRemoved?.Invoke(this, e);
         }

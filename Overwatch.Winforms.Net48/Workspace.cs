@@ -2,28 +2,25 @@
 // Copyright (C) 2006-2009 Balazs Tihanyi
 // Copyright (C) 2020 Georgi Baychev
 
-// This program is free software; you can redistribute it and/or modify it under 
-// the terms of the GNU General Public License as published by the Free Software 
+// This program is free software; you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
 // Foundation; either version 3 of the License, or (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 // FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with 
-// this program; if not, write to the Free Software Foundation, Inc., 
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, write to the Free Software Foundation, Inc.,
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using NClass.Core;
-using NClass.Core.UndoRedo;
-using NClass.GUI.Dialogs;
-using NClass.Translations;
+using TranslationsNET48;
 
-namespace NClass.GUI
+namespace Overwatch.Winforms.Net48
 {
     public class Workspace
     {
@@ -95,8 +92,8 @@ namespace NClass.GUI
                 projects.Add(project);
                 project.Modified += project_StateChanged;
                 project.FileStateChanged += file_StateChanged;
-                if (project.FilePath != null)
-                    Settings.Default.AddRecentFile(project.FilePath);
+                //if (project.FilePath != null)
+                //    Settings.Default.AddRecentFile(project.FilePath);
                 OnProjectAdded(new ProjectEventArgs(project));
             }
         }
@@ -222,7 +219,7 @@ namespace NClass.GUI
             }
             catch (Exception ex)
             {
-                DetailsErrorDialog.Show(Strings.Load, Strings.Error + ": " + ex.Message, ex.StackTrace, MessageBoxIcon.Error, true);
+                //DetailsErrorDialog.Show(Strings.Load, Strings.Error + ": " + ex.Message, ex.StackTrace, MessageBoxIcon.Error, true);
                 return null;
             }
         }
@@ -274,7 +271,7 @@ namespace NClass.GUI
                     try
                     {
                         project.Save(dialog.FileName);
-                        Settings.Default.AddRecentFile(project.FilePath);
+                        //Settings.Default.AddRecentFile(project.FilePath);
                         return true;
                     }
                     catch (Exception ex)
@@ -331,24 +328,24 @@ namespace NClass.GUI
             if (HasProject)
                 RemoveAll();
 
-            foreach (string projectFile in Settings.Default.OpenedProjects)
-            {
-                if (!string.IsNullOrEmpty(projectFile))
-                {
-                    OpenProject(projectFile);
-                }
-            }
+            //foreach (string projectFile in Settings.Default.OpenedProjects)
+            //{
+            //    if (!string.IsNullOrEmpty(projectFile))
+            //    {
+            //        OpenProject(projectFile);
+            //    }
+            //}
         }
 
         public void Save()
         {
-            Settings.Default.OpenedProjects.Clear();
+            //Settings.Default.OpenedProjects.Clear();
 
-            foreach (Project project in projects)
-            {
-                if (project.FilePath != null)
-                    Settings.Default.OpenedProjects.Add(project.FilePath);
-            }
+            //foreach (Project project in projects)
+            //{
+            //    if (project.FilePath != null)
+            //        Settings.Default.OpenedProjects.Add(project.FilePath);
+            //}
         }
 
         public bool SaveAndClose()

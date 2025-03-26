@@ -8,9 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.DocumentView;
-using DevExpress.Utils;
-using NClass.GUI.ModelExplorer;
 using Overwatch.Winforms.Net48.Properties;
+using TranslationsNET48;
 
 namespace Overwatch.Winforms.Net48.ModelExplorer
 {
@@ -142,8 +141,8 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
                 node.Text = node.Text; // Little hack to update the text's clipping size
             }
 
-            if (MonoHelper.IsRunningOnMono)
-                this.Refresh();
+            //if (MonoHelper.IsRunningOnMono)
+            //    this.Refresh();
         }
 
         private void workspace_ProjectAdded(object sender, ProjectEventArgs e)
@@ -278,7 +277,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
                 }
             }
 
-            mnuSepOpenFile.Visible = (Settings.Default.RecentFiles.Count > 0);
+            mnuSepOpen.Visible = (Settings.Default.RecentFiles.Count > 0);
         }
 
         private void mnuOpenFile_Click(object sender, EventArgs e)

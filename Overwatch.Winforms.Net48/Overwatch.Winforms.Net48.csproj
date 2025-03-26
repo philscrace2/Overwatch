@@ -37,11 +37,14 @@
     <Reference Include="DevExpress.Data.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v23.2.Core, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v23.2.Core, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v23.2, Version=23.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,8 +59,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbsoluteMouseEventArgs.cs" />
     <Compile Include="Canvas.cs" />
     <Compile Include="DocumentManager.cs" />
+    <Compile Include="DynamicMenu.cs" />
+    <Compile Include="IDocument.cs" />
+    <Compile Include="IEditable.cs" />
     <Compile Include="IModifiable.cs" />
     <Compile Include="IProjectItem.cs" />
     <Compile Include="MainForm.cs">
@@ -68,7 +75,7 @@
     </Compile>
     <Compile Include="Model.cs" />
     <Compile Include="ModelExplorer\DiagramNode.cs" />
-    <Compile Include="ModelExplorer\DocumentEventHandler.cs" />
+    <Compile Include="DocumentEventArgs.cs" />
     <Compile Include="ModelExplorer\EmptyProjectNode.cs" />
     <Compile Include="ModelExplorer\IDiagram.cs" />
     <Compile Include="ModelExplorer\ModelNode.cs" />
@@ -81,10 +88,18 @@
     <Compile Include="ModelExplorer\ProjectItemNode.cs" />
     <Compile Include="ModelExplorer\ProjectNode.cs" />
     <Compile Include="ModificationEventArgs.cs" />
+    <Compile Include="PopupWindow.cs" />
+    <Compile Include="PopupWindowEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectEventArgs.cs" />
+    <Compile Include="ProjectItemEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="TabBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,6 +122,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -138,7 +154,21 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\actual_size.png" />
+    <Content Include="Resources\disabled_slider.png" />
+    <Content Include="Resources\down.bmp" />
+    <Content Include="Resources\help.png" />
+    <Content Include="Resources\mail.png" />
+    <Content Include="Resources\new_document.png" />
+    <Content Include="Resources\open.png" />
+    <Content Include="Resources\options.png" />
+    <Content Include="Resources\play.png" />
+    <Content Include="Resources\print.png" />
+    <Content Include="Resources\project.png" />
     <Content Include="Resources\save.png" />
+    <Content Include="Resources\save_all.png" />
+    <Content Include="Resources\search_web.png" />
+    <Content Include="Resources\slider.png" />
+    <Content Include="Resources\up.bmp" />
     <Content Include="Resources\web.png" />
     <Content Include="Resources\actor.png" />
     <Content Include="Resources\aggregation.png" />

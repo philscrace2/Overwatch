@@ -17,6 +17,9 @@
 using System;
 using System.Windows.Forms;
 using TranslationsNET48;
+using Overwatch.Winforms.Net48.Properties;
+using System.Resources;
+using System.Drawing;
 
 namespace Overwatch.Winforms.Net48.ModelExplorer
 {
@@ -28,11 +31,12 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
 
         static DiagramNode()
         {
+            ResourceManager resourceManager = new ResourceManager(typeof(Strings));
             contextMenu.Items.AddRange(new ToolStripItem[] {
-                new ToolStripMenuItem(Strings.MenuOpen, Resources.Open, open_Click),
+                new ToolStripMenuItem(Strings.MenuOpen, resourceManager.GetObject("Open") as Image, open_Click),
                 new ToolStripMenuItem(Strings.MenuRename, null, renameItem_Click, Keys.F2),
                 new ToolStripSeparator(),
-                new ToolStripMenuItem(Strings.MenuDeleteProjectItem, Resources.Delete,
+                new ToolStripMenuItem(Strings.MenuDeleteProjectItem, resourceManager.GetObject("Delete") as Image,
                     deleteProjectItem_Click)
             });
         }
