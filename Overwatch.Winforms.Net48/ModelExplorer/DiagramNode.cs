@@ -146,13 +146,22 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
                 {
                     string selectedFile = openFileDialog.FileName;
 
-                    // Create a new node in the model view with the file name (without extension)
+                    // Extract the file name without extension
                     string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(selectedFile);
-                    CreateNodeInModelView(modelView, fileNameWithoutExtension);
+
+                    // Rename the existing node to the file name (without extension)
+                    node.Text = fileNameWithoutExtension;
+
+                    // Optionally, you can update other properties or trigger additional actions
+                    // If the DiagramNode has an associated diagram or data that needs to be updated:
+                    node.Diagram.Name = fileNameWithoutExtension;
+
+                    // Ensure the model view reflects this change
+                    modelView.Refresh(); // Refresh the view to update the node display if necessary
                 }
             }
 
-            // The tabbed document will now be opened but this time the ModelProgamGraphView will be used
+            // The tabbed document will now be opened but this time the ModelProgramGraphView will be used
             modelView.OnDocumentOpening(new DocumentEventArgs(node.Diagram));
         }
 
