@@ -65,8 +65,8 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
             // TODO: in the settings there should be a default diagram. This should check
             // for the default first and then only if it is a class diagram for the
             // default language
-            //IDiagram diagram = new ClassDiagram(Settings.Default.GetDefaultLanguage());
-            //project.Add(diagram);
+            IDiagram diagram = new BlankDiagram();
+            project.Add(diagram);
         }
 
         public override void DoubleClick()

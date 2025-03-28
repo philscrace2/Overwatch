@@ -62,7 +62,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
             if (!editingLabel)
             {
                 editingLabel = true;
-                this.BeginEdit();
+                //this.BeginEdit();
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Overwatch.Winforms.Net48
 {
-    partial class TabbedWindow
+    partial class Canvas
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,30 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabBar = new Overwatch.Winforms.Net48.TabBar();
-            this.SuspendLayout();
-            // 
-            // tabBar
-            // 
-            this.tabBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabBar.Location = new System.Drawing.Point(0, 0);
-            this.tabBar.Name = "tabBar";
-            this.tabBar.Size = new System.Drawing.Size(150, 27);
-            this.tabBar.TabIndex = 0;
-            // 
-            // TabbedWindow
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabBar);
-            this.Name = "TabbedWindow";
-            this.ResumeLayout(false);
-
         }
 
         #endregion
-        
-        private Canvas canvas;
-        private TabBar tabBar;
     }
 }

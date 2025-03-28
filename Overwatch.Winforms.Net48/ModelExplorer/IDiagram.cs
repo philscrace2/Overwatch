@@ -20,4 +20,5 @@ namespace Overwatch.Winforms.Net48
     {
         string Name { get; set; }
     }
+
 }

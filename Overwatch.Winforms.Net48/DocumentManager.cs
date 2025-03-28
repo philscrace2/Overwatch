@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Overwatch.Winforms.Net48
 {
     public class DocumentManager
     {
-        public event EventHandler<DocumentChangedEventArgs> ActiveDocumentChanged;
-        private Document _activeDocument;
+        public event DocumentEventHandler ActiveDocumentChanged;
+        List<IDocument> documents = new List<IDocument>();
+        private IDocument _activeDocument;
+        IDocument activeDocument = null;
+        //OrderedList<IDocument> documentHistory = new OrderedList<IDocument>();
+        LinkedListNode<IDocument> switchingNode = null;
 
         public DocumentManager()
         {
         }
 
-        public Document ActiveDocument
+        public IDocument ActiveDocument
         {
             get => _activeDocument;
             set
@@ -23,19 +28,25 @@ namespace Overwatch.Winforms.Net48
                     _activeDocument = value;
 
                     // Trigger the ActiveDocumentChanged event
-                    OnActiveDocumentChanged(new DocumentChangedEventArgs(value));
+                    OnActiveDocumentChanged(new DocumentEventArgs(value));
                 }
             }
         }
 
         // Protected method to raise the event
-        protected virtual void OnActiveDocumentChanged(DocumentChangedEventArgs e)
+        protected virtual void OnActiveDocumentChanged(DocumentEventArgs e)
         {
-            ActiveDocumentChanged?.Invoke(this, e);
+            if (ActiveDocumentChanged != null)
+                ActiveDocumentChanged(this, e);
         }
 
+        public bool HasDocument
+        {
+            get { return (documents.Count > 0); }
+        }
 
     }
+
 
     public class Document
     {
@@ -56,4 +67,6 @@ namespace Overwatch.Winforms.Net48
             NewDocument = newDocument;
         }
     }
+
+
 }

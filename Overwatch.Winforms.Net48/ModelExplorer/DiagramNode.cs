@@ -132,11 +132,39 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
 
         private static void open_Click(object sender, EventArgs e)
         {
-            ToolStripItem menuItem = (ToolStripItem) sender;
-            ModelView modelView = (ModelView) ((ContextMenuStrip) menuItem.Owner).SourceControl;
-            DiagramNode node = (DiagramNode) menuItem.Owner.Tag;
+            ToolStripItem menuItem = (ToolStripItem)sender;
+            ModelView modelView = (ModelView)((ContextMenuStrip)menuItem.Owner).SourceControl;
+            DiagramNode node = (DiagramNode)menuItem.Owner.Tag;
 
+            // Open the OpenFileDialog
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "DLL Files (*.dll)|*.dll|All Files (*.*)|*.*"; // Filter for DLL files
+                openFileDialog.Title = "Select a DLL File";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFile = openFileDialog.FileName;
+
+                    // Create a new node in the model view with the file name (without extension)
+                    string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(selectedFile);
+                    CreateNodeInModelView(modelView, fileNameWithoutExtension);
+                }
+            }
+
+            // The tabbed document will now be opened but this time the ModelProgamGraphView will be used
             modelView.OnDocumentOpening(new DocumentEventArgs(node.Diagram));
+        }
+
+        private static void CreateNodeInModelView(ModelView modelView, string nodeName)
+        {
+            // Assuming a method exists that adds a new node to the ModelView
+            // If you're using a TreeView or another collection of nodes in your model view:
+            TreeNode newNode = new TreeNode(nodeName);
+
+            // You can add more logic to customize the node further if needed.
+            modelView.Nodes.Add(newNode);
+            newNode.Expand(); // Optional: Expand the node if needed
         }
 
         private static void renameItem_Click(object sender, EventArgs e)
