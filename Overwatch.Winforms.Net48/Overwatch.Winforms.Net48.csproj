@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbsoluteMouseEventArgs.cs" />
+    <Compile Include="BitmapHelper.cs" />
     <Compile Include="BlankDiagram.cs" />
     <Compile Include="Canvas.cs">
       <SubType>UserControl</SubType>
@@ -68,6 +69,7 @@
       <DependentUpon>Canvas.cs</DependentUpon>
     </Compile>
     <Compile Include="DocumentManager.cs" />
+    <Compile Include="DocumentMovedEventArgs.cs" />
     <Compile Include="DynamicMenu.cs" />
     <Compile Include="IDocument.cs" />
     <Compile Include="IEditable.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="ModelExplorer\ProjectItemNode.cs" />
     <Compile Include="ModelExplorer\ProjectNode.cs" />
     <Compile Include="ModificationEventArgs.cs" />
+    <Compile Include="OrderedList.cs" />
     <Compile Include="PopupWindow.cs" />
     <Compile Include="PopupWindowEventArgs.cs" />
     <Compile Include="Program.cs" />

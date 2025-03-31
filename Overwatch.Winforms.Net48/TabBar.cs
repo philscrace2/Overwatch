@@ -10,10 +10,12 @@ using System.Windows.Forms;
 using Overwatch.Winforms.Net48.Properties;
 using static DevExpress.Utils.HashCodeHelper.Primitives;
 using System.IO;
+using System.Drawing.Drawing2D;
+using TranslationsNET48;
 
 namespace Overwatch.Winforms.Net48
 {
-    public partial class TabBar: Control
+    public partial class TabBar : Control
     {
         private class Tab
         {
@@ -93,7 +95,7 @@ namespace Overwatch.Winforms.Net48
                 var tabBrush = (this.IsActive ? activeTabBrush : inactiveTabBrush);
                 var imageRectangle = new Rectangle(tabRectangle.Left + 2, top + 2, 16, 16);
                 var tabTextRectangle = new Rectangle(tabRectangle.Left + Tab.IconMargin, top, closingSignLeft - tabRectangle.Left - IconMargin, tabRectangle.Height);
-                var icon = Resources.Open;
+                var icon = BitmapHelper.GetBitmapForDocument(Document);
 
                 // To display bottom line for inactive tabs
                 if (!IsActive)
@@ -109,10 +111,7 @@ namespace Overwatch.Winforms.Net48
                 g.DrawRectangle(borderPen, tabRectangle); // Draw border
 
                 var font = (IsActive) ? activeTabFont : inactiveTabFont;
-
-                MemoryStream ms  = new MemoryStream(icon);
-                Bitmap bitmap = new Bitmap(ms);
-                g.DrawImage(bitmap, imageRectangle);
+                g.DrawImage(icon, imageRectangle);
                 g.DrawString(Text, font, textBrush, tabTextRectangle, stringFormat);
 
                 Color lineColor = IsClosingSignActive ? SystemColors.ControlText : SystemColors.ControlDark;
@@ -156,13 +155,60 @@ namespace Overwatch.Winforms.Net48
         const int LeftMargin = 3;
         const int TopMargin = 3;
         const int ClosingSignSize = 8;
+
         public TabBar()
         {
             InitializeComponent();
+            UpdateTexts();
+            DoubleBuffered = true;
+            this.BackColor = SystemColors.Control;
+            this.SetStyle(ControlStyles.Selectable, false);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+
+            stringFormat = new StringFormat(StringFormat.GenericTypographic);
+            stringFormat.Alignment = StringAlignment.Near;
+            stringFormat.LineAlignment = StringAlignment.Center;
+            stringFormat.Trimming = StringTrimming.EllipsisCharacter;
+            stringFormat.FormatFlags |= StringFormatFlags.NoWrap;
+
+            activeTabFont = new Font(Font, FontStyle.Bold);
         }
 
-        public DocumentManager DocumentManager { get; internal set; }
+        private void UpdateTexts()
+        {
+            mnuClose.Text = Strings.MenuCloseTab;
+            mnuCloseAll.Text = Strings.MenuCloseAllTabs;
+            mnuCloseAllButThis.Text = Strings.MenuCloseAllTabsButThis;
+        }
 
+        [Browsable(false)]
+        public DocumentManager DocumentManager
+        {
+            get => docManager;
+            set
+            {
+                if (docManager != value)
+                {
+                    if (docManager != null)
+                    {
+                        docManager.ActiveDocumentChanged -= docManager_ActiveDocumentChanged;
+                        docManager.DocumentAdded -= docManager_DocumentAdded;
+                        docManager.DocumentRemoved -= docManager_DocumentRemoved;
+                        docManager.DocumentMoved -= docManager_DocumentMoved;
+                        ClearTabs();
+                    }
+                    docManager = value;
+                    if (docManager != null)
+                    {
+                        docManager.ActiveDocumentChanged += docManager_ActiveDocumentChanged;
+                        docManager.DocumentAdded += docManager_DocumentAdded;
+                        docManager.DocumentRemoved += docManager_DocumentRemoved;
+                        docManager.DocumentMoved += docManager_DocumentMoved;
+                        CreateTabs();
+                    }
+                }
+            }
+        }
 
         [DefaultValue(typeof(Color), "Control")]
         public override Color BackColor
@@ -191,7 +237,6 @@ namespace Overwatch.Winforms.Net48
         [DefaultValue(typeof(Color), "ControlLight")]
         public Color InactiveTabColor { get; set; } = SystemColors.ControlLight;
 
-
         [DefaultValue(200)]
         public int MaxTabWidth
         {
@@ -201,6 +246,249 @@ namespace Overwatch.Winforms.Net48
                 maxTabWidth = value;
                 if (maxTabWidth < 50)
                     maxTabWidth = 50;
+            }
+        }
+
+        protected override Size DefaultSize => new Size(100, 25);
+
+        private void CreateTabs()
+        {
+            foreach (var doc in docManager.Documents)
+            {
+                Tab tab = new Tab(doc, this);
+                tabs.Add(tab);
+                if (doc == docManager.ActiveDocument)
+                    activeTab = tab;
+            }
+        }
+
+        private void ClearTabs()
+        {
+            foreach (var tab in tabs)
+                tab.Detached();
+            tabs.Clear();
+            activeTab = null;
+        }
+
+        private void docManager_ActiveDocumentChanged(object sender, DocumentEventArgs e)
+        {
+            foreach (var tab in tabs.Where(tab => tab.Document == docManager.ActiveDocument))
+            {
+                activeTab = tab;
+                break;
+            }
+
+            this.Invalidate();
+        }
+
+        private void docManager_DocumentAdded(object sender, DocumentEventArgs e)
+        {
+            var tab = new Tab(e.Document, this);
+            tabs.Add(tab);
+        }
+
+        private void docManager_DocumentRemoved(object sender, DocumentEventArgs e)
+        {
+            for (int index = 0; index < tabs.Count; index++)
+            {
+                if (tabs[index].Document == e.Document)
+                {
+                    tabs.RemoveAt(index);
+                    this.Invalidate();
+                    return;
+                }
+            }
+        }
+
+        private void docManager_DocumentMoved(object sender, DocumentMovedEventArgs e)
+        {
+            var tab = tabs[e.OldPosition];
+
+            if (e.NewPosition > e.OldPosition)
+            {
+                for (int i = e.OldPosition; i < e.NewPosition; i++)
+                    tabs[i] = tabs[i + 1];
+            }
+            else // e.NewPosition < e.OldPosition
+            {
+                for (int i = e.OldPosition; i > e.NewPosition; i--)
+                    tabs[i] = tabs[i - 1];
+            }
+            tabs[e.NewPosition] = tab;
+            Invalidate();
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            var selectedTab = PickTab(e.Location);
+            if (selectedTab != null)
+            {
+                if (e.Button == MouseButtons.Middle || selectedTab.IsClosingSignActive)
+                {
+                    docManager.Close(selectedTab.Document);
+                }
+                else
+                {
+                    docManager.ActiveDocument = selectedTab.Document;
+                    grabbedTab = selectedTab;
+                    originalPosition = e.X;
+                }
+            }
+        }
+
+        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        {
+            base.OnMouseDoubleClick(e);
+
+            var selectedTab = PickTab(e.Location);
+            if (selectedTab != null && e.Button == MouseButtons.Left)
+            {
+                docManager.Close(selectedTab.Document);
+            }
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            if (e.Button == MouseButtons.Left && grabbedTab != null)
+            {
+                MoveTab(grabbedTab, e.Location);
+            }
+
+            var tab = PickTab(e.Location);
+            tab?.OnMouseMove(e);
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            grabbedTab = null;
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+
+            if (activeCloseButton)
+            {
+                activeCloseButton = false;
+                Invalidate();
+            }
+        }
+
+        protected override void OnFontChanged(EventArgs e)
+        {
+            base.OnFontChanged(e);
+            activeTabFont.Dispose();
+            activeTabFont = new Font(Font, FontStyle.Bold);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            if (tabs.Count > 0)
+            {
+                DrawTabs(e.Graphics);
+            }
+        }
+
+        private Tab PickTab(Point point)
+        {
+            int x = LeftMargin;
+
+            foreach (var tab in tabs)
+            {
+                if (point.X >= x && point.X < x + tab.Width)
+                    return tab;
+                x += (int)tab.Width;
+            }
+            return null;
+        }
+
+        private void MoveTab(Tab grabbedTab, Point destination)
+        {
+            var newNeighbourTab = PickTab(destination);
+
+            if (newNeighbourTab == grabbedTab)
+            {
+                originalPosition = destination.X;
+            }
+            else if (newNeighbourTab != null)
+            {
+                int oldIndex = tabs.IndexOf(grabbedTab);
+                int newIndex = tabs.IndexOf(newNeighbourTab);
+
+                if (newIndex > oldIndex) // Moving right
+                {
+                    if (destination.X >= originalPosition)
+                        docManager.MoveDocument(grabbedTab.Document, newIndex - oldIndex);
+                }
+                else if (newIndex < oldIndex) // Moving left
+                {
+                    if (destination.X <= originalPosition)
+                        docManager.MoveDocument(grabbedTab.Document, newIndex - oldIndex);
+                }
+            }
+        }
+
+        private void DrawTabs(Graphics g)
+        {
+            var borderPen = new Pen(BorderColor);
+            var activeTabBrush = new SolidBrush(ActiveTabColor);
+            var inactiveTabBrush = new LinearGradientBrush(
+                new Rectangle(0, 5, Width, Height - 1), ActiveTabColor,
+                SystemColors.ControlLight, LinearGradientMode.Vertical);
+            var left = LeftMargin;
+
+            var textBrush = ForeColor.IsKnownColor ? SystemBrushes.FromSystemColor(ForeColor) : new SolidBrush(ForeColor);
+
+            g.DrawLine(borderPen, 0, Height - 1, left, Height - 1);
+            foreach (var tab in tabs)
+            {
+                var top = (tab.IsActive ? TopMargin : TopMargin + 2);
+                var tabRectangle = new Rectangle(left, top, tab.Width, Height - top);
+                tab.Draw(g, tabRectangle, activeTabBrush, inactiveTabBrush, borderPen, textBrush, stringFormat, activeTabFont, Font);
+                left += tab.Width;
+            }
+            g.DrawLine(borderPen, left, Height - 1, Width - 1, Height - 1);
+
+            borderPen.Dispose();
+            if (!ForeColor.IsKnownColor)
+                textBrush.Dispose();
+            activeTabBrush.Dispose();
+            inactiveTabBrush.Dispose();
+        }
+
+        private void contextMenu_Opening(object sender, CancelEventArgs e)
+        {
+            if (docManager == null || !docManager.HasDocument)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void mnuClose_Click(object sender, EventArgs e)
+        {
+            if (docManager != null && activeTab != null)
+            {
+                docManager.Close(activeTab.Document);
+            }
+        }
+
+        private void mnuCloseAll_Click(object sender, EventArgs e)
+        {
+            docManager?.CloseAll();
+        }
+
+        private void mnuCloseAllButThis_Click(object sender, EventArgs e)
+        {
+            if (docManager != null && activeTab != null)
+            {
+                docManager.CloseAllOthers(activeTab.Document);
             }
         }
     }
