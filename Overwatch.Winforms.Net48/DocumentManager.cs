@@ -6,12 +6,15 @@ namespace Overwatch.Winforms.Net48
 {
     public class DocumentManager
     {
-        public event DocumentEventHandler ActiveDocumentChanged;
         List<IDocument> documents = new List<IDocument>();
         private IDocument _activeDocument;
-        IDocument activeDocument = null;
         //OrderedList<IDocument> documentHistory = new OrderedList<IDocument>();
         LinkedListNode<IDocument> switchingNode = null;
+
+        public event DocumentEventHandler ActiveDocumentChanged;
+        public event DocumentEventHandler DocumentAdded;
+        public event DocumentEventHandler DocumentRemoved;
+        //public event DocumentMovedEventHandler DocumentMoved;
 
         public DocumentManager()
         {
@@ -40,9 +43,43 @@ namespace Overwatch.Winforms.Net48
                 ActiveDocumentChanged(this, e);
         }
 
+        public void AddOrActivate(IDocument document)
+        {
+            if (document == null)
+                throw new ArgumentNullException("document");
+
+            //EndSwitching();
+
+            IDocument oldDocument = _activeDocument;
+            if (documents.Contains(document))
+            {
+                if (_activeDocument != document)
+                {
+                    _activeDocument = document;
+                    //documentHistory.ShiftToFirstPlace(document);
+                    OnActiveDocumentChanged(new DocumentEventArgs(oldDocument));
+                }
+            }
+            else
+            {
+                documents.Add(document);
+                _activeDocument = document;
+                //documentHistory.AddFirst(document);
+                //document.Closing += new EventHandler(document_Closing);
+                OnDocumentAdded(new DocumentEventArgs(document));
+                OnActiveDocumentChanged(new DocumentEventArgs(oldDocument));
+            }
+        }
+
         public bool HasDocument
         {
             get { return (documents.Count > 0); }
+        }
+
+        protected virtual void OnDocumentAdded(DocumentEventArgs e)
+        {
+            if (DocumentAdded != null)
+                DocumentAdded(this, e);
         }
 
     }

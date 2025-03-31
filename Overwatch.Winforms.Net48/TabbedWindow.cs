@@ -40,7 +40,7 @@ namespace Overwatch.Winforms.Net48
                     if (docManager != null)
                     {
                         docManager.ActiveDocumentChanged += docManager_ActiveDocumentChanged;
-                        //canvas.Document = docManager.ActiveDocument;
+                        canvas.Document = docManager.ActiveDocument;
                     }
                     else
                     {

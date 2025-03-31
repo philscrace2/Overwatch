@@ -109,6 +109,7 @@
             // ModelView
             // 
             this.LineColor = System.Drawing.Color.Black;
+            this.LabelEdit = true;
             this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

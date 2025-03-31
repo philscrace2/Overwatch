@@ -1,4 +1,6 @@
-﻿namespace Overwatch.Winforms.Net48
+﻿using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
+
+namespace Overwatch.Winforms.Net48
 {
     partial class MainForm
     {
@@ -190,6 +192,8 @@
             this.modelExplorer.Size = new System.Drawing.Size(151, 166);
             this.modelExplorer.TabIndex = 0;
             this.modelExplorer.Workspace = null;
+            this.modelExplorer.LabelEdit = true;
+            this.modelExplorer.DocumentOpening += new DocumentEventHandler(this.modelExplorer_DocumentOpening);
             // 
             // MainForm
             // 

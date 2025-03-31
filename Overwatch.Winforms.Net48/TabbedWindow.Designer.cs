@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabBar = new Overwatch.Winforms.Net48.TabBar();
+            this.canvas = new Overwatch.Winforms.Net48.Canvas();
             this.SuspendLayout();
             // 
             // tabBar
@@ -39,10 +40,19 @@
             this.tabBar.Size = new System.Drawing.Size(150, 27);
             this.tabBar.TabIndex = 0;
             // 
+            // canvas
+            // 
+            this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvas.Location = new System.Drawing.Point(0, 27);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(150, 123);
+            this.canvas.TabIndex = 1;
+            // 
             // TabbedWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.canvas);
             this.Controls.Add(this.tabBar);
             this.Name = "TabbedWindow";
             this.ResumeLayout(false);

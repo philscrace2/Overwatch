@@ -26,7 +26,10 @@ namespace Overwatch.Winforms.Net48
 
         string Name { get; set; }
 
-        Project Project { get; set; }
+        Project Project 
+        { get; 
+            
+        set; }
 
         bool IsUntitled { get; }
 

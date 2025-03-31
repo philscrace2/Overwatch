@@ -19,12 +19,12 @@ namespace Overwatch.Winforms.Net48
         {
             InitializeComponent();
 
-            tabbedWindow.DocumentManager = docManager;
             //Workspace.Default.ActiveProjectChanged += delegate { UpdateTitleBar(); };
             //Workspace.Default.ActiveProjectStateChanged += delegate { UpdateTitleBar(); };
             Workspace.Default.ProjectAdded += delegate { ShowModelExplorer = true; };
             docManager.ActiveDocumentChanged += docManager_ActiveDocumentChanged;
             modelExplorer.Workspace = Workspace.Default;
+            tabbedWindow.DocumentManager = docManager;
         }
 
         private void docManager_ActiveDocumentChanged(object sender, DocumentEventArgs e)
@@ -37,7 +37,7 @@ namespace Overwatch.Winforms.Net48
                 //docManager.ActiveDocument.ClipboardAvailabilityChanged +=
                 //    ActiveDocument_ClipboardAvailabilityChanged;
                 //docManager.ActiveDocument.UndoRedoChanged += ActiveDocument_UndoRedoChanged;
-                //this.tabbedWindow.Canvas.Focus();
+                this.tabbedWindow.Canvas.Focus();
             }
             else
             {
@@ -55,6 +55,11 @@ namespace Overwatch.Winforms.Net48
             //}
 
 
+        }
+
+        private void modelExplorer_DocumentOpening(object sender, DocumentEventArgs e)
+        {
+            docManager.AddOrActivate(e.Document);
         }
 
         private bool ShowModelExplorer

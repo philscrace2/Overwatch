@@ -161,7 +161,6 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
                 }
             }
 
-            // The tabbed document will now be opened but this time the ModelProgramGraphView will be used
             modelView.OnDocumentOpening(new DocumentEventArgs(node.Diagram));
         }
 
