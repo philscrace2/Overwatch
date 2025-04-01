@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NClass.DiagramEditor
+namespace Overwatch.Winforms.Net48
 {
     public class OrderedList<T> : LinkedList<T> where T : class
     {
