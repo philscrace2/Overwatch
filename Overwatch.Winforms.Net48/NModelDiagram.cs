@@ -14,10 +14,10 @@ using System.Xml;
 
 namespace Overwatch.Winforms.Net48
 {
-    public class BlankDiagram : IDiagram
+    public class NModelDiagram : IDiagram
     {
         ProductModelProgram mp;
-        public BlankDiagram()
+        public NModelDiagram()
         {
             this.Project = new Project();
             this.Name = "Add Model Program";
@@ -50,7 +50,19 @@ namespace Overwatch.Winforms.Net48
 
         public ProductModelProgram ProductModelProgram
         {
-            get;
+            get {
+                return mp;
+                //FSM fa = FsmTraversals.GenerateTestSequenceAutomaton(
+                //    settings.startTestAction, testcases, GetActionSymbols(testcases));
+                //ModelProgram famp = new FsmModelProgram(fa, settings.testSuite);
+                //if (mp == null)
+                //    mp = famp;
+                //else
+                //    mp = new ProductModelProgram(mp, famp);
+
+
+            }
+
         }
 
         public event EventHandler OffsetChanged;

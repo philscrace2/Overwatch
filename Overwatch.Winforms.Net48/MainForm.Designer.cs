@@ -31,31 +31,31 @@ namespace Overwatch.Winforms.Net48
         private void InitializeComponent()
         {
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblShortDesc = new System.Windows.Forms.ToolStripStatusLabel();
             this.windowClient = new System.Windows.Forms.SplitContainer();
-            this.tabbedWindow = new Overwatch.Winforms.Net48.TabbedWindow();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblShortDesc = new System.Windows.Forms.ToolStripStatusLabel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabbedWindow = new Overwatch.Winforms.Net48.TabbedWindow();
             this.modelExplorer = new Overwatch.Winforms.Net48.ModelExplorer.ModelView();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.windowClient)).BeginInit();
             this.windowClient.Panel1.SuspendLayout();
             this.windowClient.Panel2.SuspendLayout();
             this.windowClient.SuspendLayout();
-            this.menuStrip.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -81,6 +81,34 @@ namespace Overwatch.Winforms.Net48
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.mainToolStrip);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus,
+            this.lblShortDesc});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 0;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = false;
+            this.lblStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(660, 17);
+            this.lblStatus.Text = "Status";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblShortDesc
+            // 
+            this.lblShortDesc.AutoSize = false;
+            this.lblShortDesc.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblShortDesc.Name = "lblShortDesc";
+            this.lblShortDesc.Size = new System.Drawing.Size(98, 17);
+            this.lblShortDesc.Text = "Short Description";
+            // 
             // windowClient
             // 
             this.windowClient.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -98,15 +126,19 @@ namespace Overwatch.Winforms.Net48
             this.windowClient.SplitterDistance = 645;
             this.windowClient.TabIndex = 0;
             // 
-            // tabbedWindow
+            // splitContainer1
             // 
-            this.tabbedWindow.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.tabbedWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabbedWindow.DocumentManager = null;
-            this.tabbedWindow.Location = new System.Drawing.Point(0, 0);
-            this.tabbedWindow.Name = "tabbedWindow";
-            this.tabbedWindow.Size = new System.Drawing.Size(645, 379);
-            this.tabbedWindow.TabIndex = 0;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.modelExplorer);
+            this.splitContainer1.Size = new System.Drawing.Size(151, 379);
+            this.splitContainer1.SplitterDistance = 166;
+            this.splitContainer1.TabIndex = 0;
             // 
             // menuStrip
             // 
@@ -141,59 +173,27 @@ namespace Overwatch.Winforms.Net48
             this.mainToolStrip.Size = new System.Drawing.Size(102, 25);
             this.mainToolStrip.TabIndex = 1;
             // 
-            // statusStrip1
+            // tabbedWindow
             // 
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus,
-            this.lblShortDesc});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
-            this.statusStrip1.TabIndex = 0;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = false;
-            this.lblStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(660, 17);
-            this.lblStatus.Text = "Status";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblShortDesc
-            // 
-            this.lblShortDesc.AutoSize = false;
-            this.lblShortDesc.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.lblShortDesc.Name = "lblShortDesc";
-            this.lblShortDesc.Size = new System.Drawing.Size(98, 17);
-            this.lblShortDesc.Text = "Short Description";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.modelExplorer);
-            this.splitContainer1.Size = new System.Drawing.Size(151, 379);
-            this.splitContainer1.SplitterDistance = 166;
-            this.splitContainer1.TabIndex = 0;
+            this.tabbedWindow.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.tabbedWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabbedWindow.DocumentManager = null;
+            this.tabbedWindow.Location = new System.Drawing.Point(0, 0);
+            this.tabbedWindow.Name = "tabbedWindow";
+            this.tabbedWindow.Size = new System.Drawing.Size(645, 379);
+            this.tabbedWindow.TabIndex = 0;
             // 
             // modelExplorer
             // 
             this.modelExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelExplorer.LabelEdit = true;
             this.modelExplorer.Location = new System.Drawing.Point(0, 0);
             this.modelExplorer.Name = "modelExplorer";
             this.modelExplorer.ShowNodeToolTips = true;
             this.modelExplorer.Size = new System.Drawing.Size(151, 166);
             this.modelExplorer.TabIndex = 0;
             this.modelExplorer.Workspace = null;
-            this.modelExplorer.LabelEdit = true;
-            this.modelExplorer.DocumentOpening += new DocumentEventHandler(this.modelExplorer_DocumentOpening);
+            this.modelExplorer.DocumentOpening += new Overwatch.Winforms.Net48.DocumentEventHandler(this.modelExplorer_DocumentOpening);
             // 
             // MainForm
             // 
@@ -203,7 +203,7 @@ namespace Overwatch.Winforms.Net48
             this.Controls.Add(this.toolStripContainer1);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Overwatch";
             this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -211,17 +211,17 @@ namespace Overwatch.Winforms.Net48
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.windowClient.Panel1.ResumeLayout(false);
             this.windowClient.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.windowClient)).EndInit();
             this.windowClient.ResumeLayout(false);
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }

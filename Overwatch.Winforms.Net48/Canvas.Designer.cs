@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Dock  = System.Windows.Forms.DockStyle.Fill;
         }
 
         #endregion

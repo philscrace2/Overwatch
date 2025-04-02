@@ -14,6 +14,7 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System.Drawing;
+using Overwatch.Winforms.Net48.Properties;
 
 
 namespace Overwatch.Winforms.Net48
@@ -30,10 +31,10 @@ namespace Overwatch.Winforms.Net48
             //        return Resources.Java;
             //}
 
-            //if (document is UseCaseDiagram.UseCaseDiagram)
-            //{
-            //    return Resources.UseCaseDiagram;
-            //}
+            if (document is NModelDiagram)
+            {
+                return Resources.Play;
+            }
 
             return null;
         }

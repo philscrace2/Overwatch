@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System;
+using NModel.Execution;
 
 namespace Overwatch.Winforms.Net48
 {
@@ -36,5 +37,7 @@ namespace Overwatch.Winforms.Net48
 
         ContextMenuStrip GetContextMenu(AbsoluteMouseEventArgs e);
         ContextMenu GetContextMenu();
+
+        ProductModelProgram ProductModelProgram { get; }
     }
 }

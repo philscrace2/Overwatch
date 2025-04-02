@@ -62,6 +62,7 @@
     <Compile Include="AbsoluteMouseEventArgs.cs" />
     <Compile Include="BitmapHelper.cs" />
     <Compile Include="BlankDiagram.cs" />
+    <Compile Include="NModelDiagram.cs" />
     <Compile Include="Canvas.cs">
       <SubType>UserControl</SubType>
     </Compile>
