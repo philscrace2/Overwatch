@@ -1276,4 +1276,7 @@ Do you still want to continue?</value>
   <data name="UndoRedoOpenFile" xml:space="preserve">
     <value>Open File</value>
   </data>
+  <data name="MnuNModelProject" xml:space="preserve">
+    <value>NModel Model</value>
+  </data>
 </root>

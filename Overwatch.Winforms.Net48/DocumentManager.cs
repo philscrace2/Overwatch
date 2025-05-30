@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NModel.Execution;
+using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
@@ -91,9 +92,9 @@ namespace Overwatch.Winforms.Net48
                 documents.Add(document);
                 activeDocument = document;
                 documentHistory.AddFirst(document);
-                document.Closing += new EventHandler(document_Closing);
+                //document.Closing += new EventHandler(document_Closing);
                 OnDocumentAdded(new DocumentEventArgs(document));
-                OnActiveDocumentChanged(new DocumentEventArgs(oldDocument));
+                OnActiveDocumentChanged(new DocumentEventArgs(document));
             }
         }
 
@@ -133,7 +134,7 @@ namespace Overwatch.Winforms.Net48
             if (documents.Remove(document))
             {
                 documentHistory.Remove(document);
-                document.Closing -= new EventHandler(document_Closing);
+                //document.Closing -= new EventHandler(document_Closing);
                 OnDocumentRemoved(new DocumentEventArgs(document));
                 if (activeDocument == document)
                 {
@@ -162,7 +163,7 @@ namespace Overwatch.Winforms.Net48
                 {
                     IDocument document = documents[documents.Count - 1];
                     documents.RemoveAt(documents.Count - 1);
-                    document.Closing -= new EventHandler(document_Closing);
+                    //document.Closing -= new EventHandler(document_Closing);
                     OnDocumentRemoved(new DocumentEventArgs(document));
                 }
 
@@ -195,7 +196,7 @@ namespace Overwatch.Winforms.Net48
                         document = documents[documents.Count - 2];
                         documents.RemoveAt(documents.Count - 2);
                     }
-                    document.Closing -= new EventHandler(document_Closing);
+                    //document.Closing -= new EventHandler(document_Closing);
                     OnDocumentRemoved(new DocumentEventArgs(document));
                 }
 
@@ -262,9 +263,13 @@ namespace Overwatch.Winforms.Net48
     }
 
 
-    public class Document
+    public class Document : IDocument
     {
         public string Name { get; set; }
+
+        public ProductModelProgram ProductModelProgram { get; set; }
+
+        public Project Project { get; set; }
 
         public Document(string name)
         {

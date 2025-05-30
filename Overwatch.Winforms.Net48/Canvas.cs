@@ -32,6 +32,10 @@ namespace Overwatch.Winforms.Net48
             set {
 
                 document = value;
+                if (document.ProductModelProgram == null)
+                {
+
+                }
                 LoadModelProgram();
             }
         }

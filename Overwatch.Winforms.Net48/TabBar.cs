@@ -31,8 +31,8 @@ namespace Overwatch.Winforms.Net48
             {
                 this.Document = document;
                 this.parent = parent;
-                document.Renamed += document_Renamed;
-                text = document.Name;
+                //document.Renamed += document_Renamed;
+                //text = document.Name;
                 textWidth = MeasureWidth(text);
             }
 
@@ -62,7 +62,7 @@ namespace Overwatch.Winforms.Net48
 
             public void Detached()
             {
-                Document.Renamed -= document_Renamed;
+                //Document.Renamed -= document_Renamed;
             }
 
             private float MeasureWidth(string textToMeasure)

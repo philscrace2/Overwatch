@@ -2674,6 +2674,15 @@ namespace TranslationsNET48 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NModel Model.
+        /// </summary>
+        public static string MnuNModelProject {
+            get {
+                return ResourceManager.GetString("MnuNModelProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modifier:.
         /// </summary>
         public static string Modifier {

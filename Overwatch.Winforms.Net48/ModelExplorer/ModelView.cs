@@ -75,7 +75,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
 
         private void AddProject(Project project)
         {
-            ModelNode projectNode = new ProjectNode(project);
+            ModelNode projectNode = new ProjectNode(project, this);
             Nodes.Add(projectNode);
             projectNode.AfterInitialized();
 

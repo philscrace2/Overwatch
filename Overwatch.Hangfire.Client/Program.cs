@@ -36,6 +36,8 @@ namespace Overwatch.Hangfire.Client
                     break;
                 }
 
+                selectedTests.Clear();
+
                 overwatchprojects = GetOverwatchProjectsFromDisk(@"C:\Overwatch\Projects");
 
             }

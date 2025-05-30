@@ -9,6 +9,7 @@
     <PackageReference Include="OpenAI" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CT\CT.csproj" />
     <ProjectReference Include="..\FileSystem\FileSystem.csproj" />
   </ItemGroup>
   <ItemGroup>

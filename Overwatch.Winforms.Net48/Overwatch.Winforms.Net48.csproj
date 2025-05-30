@@ -83,7 +83,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model.cs" />
-    <Compile Include="ModelExplorer\DiagramNode.cs" />
     <Compile Include="DocumentEventArgs.cs" />
     <Compile Include="ModelExplorer\EmptyProjectNode.cs" />
     <Compile Include="ModelExplorer\IDiagram.cs" />

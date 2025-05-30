@@ -6,38 +6,41 @@ using NModel.Execution;
 
 namespace Overwatch.Winforms.Net48
 {
-    public interface IDocument : IProjectItem, IEditable, IPrintable
+    public interface IDocument
     {
-        event EventHandler OffsetChanged;
-        event EventHandler SizeChanged;
-        event EventHandler ZoomChanged;
-        event EventHandler StatusChanged;
-        event EventHandler NeedsRedraw;
-        event PopupWindowEventHandler ShowingWindow;
-        event PopupWindowEventHandler HidingWindow;
+        //event EventHandler OffsetChanged;
+        //event EventHandler SizeChanged;
+        //event EventHandler ZoomChanged;
+        //event EventHandler StatusChanged;
+        //event EventHandler NeedsRedraw;
+        //event PopupWindowEventHandler ShowingWindow;
+        //event PopupWindowEventHandler HidingWindow;
 
-        Point Offset { get; set; }
-        Size Size { get; }
-        float Zoom { get; set; }
-        Color BackColor { get; }
-        bool HasSelectedElement { get; }
+        //Point Offset { get; set; }
+        //Size Size { get; }
+        //float Zoom { get; set; }
+        //Color BackColor { get; }
+        //bool HasSelectedElement { get; }
 
-        void Display(Graphics g);
-        void Redraw();
-        void CloseWindows();
-        DynamicMenu GetDynamicMenu();
-        string GetStatus();
-        string GetShortDescription();
-        string GetSelectedElementName();
-        void MouseDown(AbsoluteMouseEventArgs e);
-        void MouseMove(AbsoluteMouseEventArgs e);
-        void MouseUp(AbsoluteMouseEventArgs e);
-        void DoubleClick(AbsoluteMouseEventArgs e);
-        void KeyDown(KeyEventArgs e);
+        //void Display(Graphics g);
+        //void Redraw();
+        //void CloseWindows();
+        //DynamicMenu GetDynamicMenu();
+        //string GetStatus();
+        //string GetShortDescription();
+        //string GetSelectedElementName();
+        //void MouseDown(AbsoluteMouseEventArgs e);
+        //void MouseMove(AbsoluteMouseEventArgs e);
+        //void MouseUp(AbsoluteMouseEventArgs e);
+        //void DoubleClick(AbsoluteMouseEventArgs e);
+        //void KeyDown(KeyEventArgs e);
 
-        ContextMenuStrip GetContextMenu(AbsoluteMouseEventArgs e);
-        ContextMenu GetContextMenu();
+        //ContextMenuStrip GetContextMenu(AbsoluteMouseEventArgs e);
+        //ContextMenu GetContextMenu();
 
+        string Name { get; set; }
+
+        Project Project { get; set; }
         ProductModelProgram ProductModelProgram { get; }
     }
 }

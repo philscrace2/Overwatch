@@ -55,7 +55,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
             this.ImageKey = imageKey;
             this.SelectedImageKey = imageKey;
 
-            diagram.Renamed += new EventHandler(diagram_Renamed);
+            //diagram.Renamed += new EventHandler(diagram_Renamed);
         }
 
         private string ImageKeyForDiagram(IDiagram diagram)
@@ -105,7 +105,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
 
         public override void BeforeDelete()
         {
-            diagram.Renamed -= new EventHandler(diagram_Renamed);
+            //diagram.Renamed -= new EventHandler(diagram_Renamed);
             base.BeforeDelete();
         }
 

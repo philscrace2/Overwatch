@@ -18,22 +18,21 @@ using System;
 using System.Windows.Forms;
 using TranslationsNET48;
 using Overwatch.Winforms.Net48.Properties;
+using DevExpress.XtraEditors.Filtering;
 
 namespace Overwatch.Winforms.Net48.ModelExplorer
 {
     public sealed class ProjectNode : ModelNode
     {
         Project project;
+        private readonly ModelView modelView;
         static ContextMenuStrip contextMenu = new ContextMenuStrip();
 
-        static ProjectNode()
+        public void BuildProjectNode()
         {
             contextMenu.Items.AddRange(new ToolStripItem[] {
                 new ToolStripMenuItem(Strings.MenuAddNew, Resources.NewDocument,
-                    new ToolStripMenuItem(Strings.MenuCSharpDiagram, null, newCSharpDiagram_Click),
-                    new ToolStripMenuItem(Strings.MenuJavaDiagram, null, newJavaDiagram_Click),
-                    new ToolStripSeparator(),
-                    new ToolStripMenuItem(Strings.MenuUseCaseDiagram, null, newUseCaseDiagram_Click)
+                    new ToolStripMenuItem(Strings.MnuNModelProject, null, newNModelDiagram_Click)
                 ),
                 new ToolStripSeparator(),
                 new ToolStripMenuItem(Strings.MenuSave, Resources.Save, save_Click),
@@ -47,12 +46,15 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
         /// <exception cref="ArgumentNullException">
         /// <paramref name="project"/> is null.
         /// </exception>
-        public ProjectNode(Project project)
+        public ProjectNode(Project project, ModelView modelView)
         {
+            BuildProjectNode();
+
             if (project == null)
                 throw new ArgumentNullException("project");
 
             this.project = project;
+            this.modelView = modelView;
             this.Text = project.Name;
             this.ImageKey = "project";
             this.SelectedImageKey = "project";
@@ -86,10 +88,10 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
         {
             if (project.IsEmpty)
             {
-                ModelNode node = new EmptyProjectNode(project);
-                Nodes.Add(node);
-                if (TreeView != null)
-                    node.AfterInitialized();
+            //    ModelNode node = new EmptyProjectNode(project);
+            //    Nodes.Add(node);
+            //    if (TreeView != null)
+            //        node.AfterInitialized();
             }
             else
             {
@@ -107,7 +109,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
             if (projectItem is IDiagram)
             {
                 IDiagram diagram = (IDiagram) projectItem;
-                node = new DiagramNode(diagram);
+                //node = new DiagramNode(diagram);
                 //if (TreeView != null)
                     //ModelView.OnDocumentOpening(new DocumentEventArgs(diagram));
             }
@@ -178,14 +180,40 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
             base.BeforeDelete();
         }
 
-        private static void newCSharpDiagram_Click(object sender, EventArgs e)
+        private void newNModelDiagram_Click(object sender, EventArgs e)
         {
-            //ToolStripItem menuItem = (ToolStripItem) sender;
-            //Project project = ((ProjectNode) menuItem.OwnerItem.Owner.Tag).Project;
+            ToolStripItem menuItem = (ToolStripItem)sender;
 
-            //IDiagram diagram = new ClassDiagram(CSharpLanguage.Instance);
-            //project.Add(diagram);
-            //Settings.Default.DefaultLanguageName = CSharpLanguage.Instance.AssemblyName;
+            // Open the OpenFileDialog
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "DLL Files (*.dll)|*.dll|All Files (*.*)|*.*"; // Filter for DLL files
+                openFileDialog.Title = "Select a DLL File";
+
+                TreeNode node = ModelView.SelectedNode;
+                TreeNode newNode = new TreeNode("New Diagram");
+                ModelView.Nodes.Add(newNode);
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFile = openFileDialog.FileName;
+
+                    // Extract the file name without extension
+                    string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(selectedFile);
+
+                    // Rename the existing node to the file name (without extension)
+                    newNode.Text = fileNameWithoutExtension;
+
+                    // Optionally, you can update other properties or trigger additional actions
+                    // If the DiagramNode has an associated diagram or data that needs to be updated:
+                    newNode.Name = fileNameWithoutExtension;
+
+                    // Ensure the model view reflects this change
+                    this.ModelView.Refresh(); // Refresh the view to update the node display if necessary
+                }
+            }
+
+            this.modelView.OnDocumentOpening(new DocumentEventArgs(new Document("things")));
         }
 
         private static void newJavaDiagram_Click(object sender, EventArgs e)

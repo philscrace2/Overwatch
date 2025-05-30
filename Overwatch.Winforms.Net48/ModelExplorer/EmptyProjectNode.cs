@@ -66,7 +66,7 @@ namespace Overwatch.Winforms.Net48.ModelExplorer
             // for the default first and then only if it is a class diagram for the
             // default language
             IDiagram diagram = new NModelDiagram();
-            project.Add(diagram);
+            //project.Add(diagram);
         }
 
         public override void DoubleClick()

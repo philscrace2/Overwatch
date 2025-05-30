@@ -19,7 +19,7 @@ namespace Overwatch.Hangfire.Client
         {
             Console.WriteLine($"Executing {selectedTests.Count} tests...");
 
-            // Dynamically run the tests in parallel
+            //Dynamically run the tests in parallel
             foreach (var test in selectedTests)
             {
                 // Enqueue each test to run in parallel via Hangfire
@@ -34,7 +34,7 @@ namespace Overwatch.Hangfire.Client
             try
             {
                 // Path for log output
-                string logFilePath = Path.Combine(Path.Combine(m_projectsPath, testProject.Name), $"log.txt");
+                string logFilePath = testProject.LogFile; //Path.Combine(Path.Combine(m_projectsPath, testProject.Name), $"log.txt");
                 string projectsFilePath = Path.Combine(m_projectsPath, testProject.Name);
 
                 // Create the log directory if it doesn't exist
